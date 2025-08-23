@@ -6,3 +6,5 @@ Lab 3 - Styles
 Lab 4 - Props & Component
 
 Lab 5 - Screens
+
+Lab 6 - Navigation
