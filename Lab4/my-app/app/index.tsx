@@ -28,7 +28,7 @@ const App = () => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.content}>
+      <View style={styles.content}>
         {/* Welcome Section */}
         <Text style={styles.greeting}>Hi. Suranaree</Text>
         <Text style={styles.title}>Choose your favourite shoe</Text>
@@ -75,8 +75,10 @@ const App = () => {
           />
         </View>
         <Text style={styles.recommendedTitle}>Recommended for you</Text>
-
-        {/* Recommended Products */}
+      </View>
+      
+      {/* Recommended Products */}
+      <ScrollView>
         <View style={styles.productsContainer}>
           <ProductCard
             image={require("../assets/images/shoe1.png")}

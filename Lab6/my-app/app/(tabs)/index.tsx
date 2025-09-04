@@ -13,6 +13,45 @@ import SearchBar from "../SearchBar"; // Make sure SearchBar.js is in the same d
 import ProductCard from "../ProductCard"; // Make sure ProductCard.js is in the same directory
 import { useRouter } from "expo-router";
 
+const products = [
+  {
+    image: require("../../assets/images/shoe1.png"),
+    name: "Nike Sport",
+    price: "930.99",
+    description: "Nike Sport is a comfortable running shoe.",
+  },
+  {
+    image: require("../../assets/images/shoe2.png"),
+    name: "Puma runner",
+    price: "890.50",
+    description: "Puma runner is perfect for daily jogging.",
+  },
+  {
+    image: require("../../assets/images/shoe3.png"),
+    name: "Fila classic",
+    price: "890.50",
+    description: "Fila classic is a timeless design.",
+  },
+  {
+    image: require("../../assets/images/shoe1.png"),
+    name: "Adidas boost",
+    price: "1,050.00",
+    description: "Adidas boost gives you extra energy.",
+  },
+  {
+    image: require("../../assets/images/shoe2.png"),
+    name: "Converse street",
+    price: "799.00",
+    description: "Converse street is stylish and durable.",
+  },
+  {
+    image: require("../../assets/images/shoe3.png"),
+    name: "Vans classic",
+    price: "950.00",
+    description: "Vans classic for everyday comfort.",
+  },
+];
+
 const App = () => {
   const router = useRouter();
 
@@ -81,41 +120,28 @@ const App = () => {
 
         {/* Recommended Products */}
         <View style={styles.productsContainer}>
-          <TouchableOpacity onPress={() => router.push("/ProductDetailScreen")}>
-            <ProductCard
-              image={require("../../assets/images/shoe1.png")}
-              name="Nike Sport"
-              price="930.99"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push("/ProductDetailScreen")}>
-            <ProductCard
-              image={require("../../assets/images/shoe2.png")}
-              name="Puma runner"
-              price="890.50"
-            />
-          </TouchableOpacity>
-          <ProductCard
-            image={require("../../assets/images/shoe3.png")}
-            name="Fila classic"
-            price="890.50"
-          />
-          <ProductCard
-            image={require("../../assets/images/shoe1.png")}
-            name="Adidas boost"
-            price="1,050.00"
-          />
-          <ProductCard
-            image={require("../../assets/images/shoe2.png")}
-            name="Converse street"
-            price="799.00"
-          />
-          <ProductCard
-            image={require("../../assets/images/shoe3.png")}
-            name="Vans classic"
-            price="950.00"
-          />
-          {/* เพิ่มสินค้าอื่น ๆ ด้วย ProductCard ได้เลย */}
+          {products.map((product, idx) => (
+            <TouchableOpacity
+              key={idx}
+              onPress={() =>
+                router.push({
+                  pathname: "/ProductDetailScreen",
+                  params: {
+                    name: product.name,
+                    price: product.price,
+                    description: product.description,
+                    image: idx.toString(), // ส่ง index เพื่อเลือกภาพในหน้ารายละเอียด
+                  },
+                })
+              }
+            >
+              <ProductCard
+                image={product.image}
+                name={product.name}
+                price={product.price}
+              />
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>

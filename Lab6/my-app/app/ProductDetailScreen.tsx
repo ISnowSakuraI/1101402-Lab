@@ -8,14 +8,33 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useLocalSearchParams } from "expo-router";
+
+const images = [
+  require("../assets/images/shoe1.png"),
+  require("../assets/images/shoe2.png"),
+  require("../assets/images/shoe3.png"),
+  require("../assets/images/shoe1.png"),
+  require("../assets/images/shoe2.png"),
+  require("../assets/images/shoe3.png"),
+];
 
 const ProductDetailScreen = () => {
+  const params = useLocalSearchParams();
+  const name = params.name || "Adidas Stan Smith";
+  const price = params.price || "$850.99";
+  const description =
+    params.description ||
+    "Take a seat at the table and add your special touch to the hoops to streets icon...";
+  const imageIndex = params.image ? parseInt(params.image as string) : 0;
+  const imageSource = images[imageIndex] || images[0];
+
   return (
     <View style={styles.container}>
       {/* Product Image */}
       <View style={styles.imageSection}>
         <Image
-          source={require("../assets/images/shoe1.png")}
+          source={imageSource}
           style={styles.productImage}
           resizeMode="contain"
         />
@@ -24,8 +43,8 @@ const ProductDetailScreen = () => {
       <View style={styles.detailsSection}>
         {/* Product Info */}
         <View style={styles.infoSection}>
-          <Text style={styles.productName}>Adidas Stan Smith</Text>
-          <Text style={styles.productPrice}>$850.99</Text>
+          <Text style={styles.productName}>{name}</Text>
+          <Text style={styles.productPrice}>${price}</Text>
         </View>
 
         {/* Available Sizes */}
@@ -46,17 +65,7 @@ const ProductDetailScreen = () => {
         <View style={styles.descriptionSection}>
           <Text style={styles.sectionTitle}>Description</Text>
           <ScrollView style={styles.descriptionScrollView}>
-            <Text style={styles.descriptionText}>
-              Take a seat at the table and add your special touch to the hoops
-              to streets icon. Inspired by the audacious, the customizable
-              design lets you be as expressive as you want. Choose between
-              canvas and suede accents for a healthy dose of trail-time flavor.
-              Add classic leather for those on-the-court days. Next, write a
-              piece of your story on the pull tab, which doubles as the perfect
-              spot to attach your kicks to your backpack when its time to cross
-              streets or hit the beach. Plus, countless color options let you be
-              as adventurous as you want.
-            </Text>
+            <Text style={styles.descriptionText}>{description}</Text>
           </ScrollView>
         </View>
 
